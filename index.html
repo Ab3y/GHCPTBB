@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Copilot Billing Calculator — Per-Seat vs Usage-Based (Beta)</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+        <h1>GitHub Copilot Billing Calculator <span style="font-size:0.5em;color:#d29922;vertical-align:super;">BETA</span></h1>
+      </div>
+      <div class="billing-toggle">
+        <span class="toggle-label" id="label-seat">Per-Seat</span>
+        <label class="switch">
+          <input type="checkbox" id="billingToggle">
+          <span class="slider"></span>
+        </label>
+        <span class="toggle-label active" id="label-token">Token-Based (UBB)</span>
+      </div>
+    </div>
+    <p class="subtitle">Effective June 1, 2026 — Compare billing models and optimize your organization's AI credit spend</p>
+  <p class="subtitle" style="color:#d29922;font-size:0.78rem;margin-top:4px;">⚠️ Unofficial tool — built to help navigate GitHub Copilot billing changes. Not affiliated with or endorsed by GitHub. Always verify pricing at <a href="https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing" target="_blank" style="color:#58a6ff;">docs.github.com</a>.</p>
+  </header>
+
+  <main>
+    <div class="dashboard-layout">
+      <!-- Main Content Area -->
+      <div class="main-content">
+        <!-- Transition Banner -->
+        <div class="transition-banner">
+          <div class="banner-icon">⚡</div>
+          <div class="banner-text">
+            <strong>What's Changing:</strong> GitHub Copilot is moving from flat per-request (PRU) pricing to Usage-Based Billing (UBB).
+            Seat prices stay the same, but advanced features (Chat, Agent Mode, Code Review) now consume AI credits based on actual token usage.
+            <strong>Code completions remain FREE.</strong>
+          </div>
+        </div>
+
+        <!-- Plan Cards -->
+        <section class="plan-cards" id="planCards">
+          <div class="plan-card" data-plan="pro">
+            <div class="plan-header pro">
+              <h3>Copilot Pro</h3>
+              <div class="plan-price">$10<span>/user/mo</span></div>
+            </div>
+            <div class="plan-body">
+              <div class="plan-detail seat-detail">
+                <div class="detail-row"><span>PRU Allowance</span><strong>300/mo</strong></div>
+                <div class="detail-row"><span>Overage</span><strong>$0.04/request</strong></div>
+                <div class="detail-row"><span>Model Choice</span><strong>Limited</strong></div>
+              </div>
+              <div class="plan-detail token-detail">
+                <div class="detail-row"><span>AI Credits</span><strong>1,000/mo</strong></div>
+                <div class="detail-row"><span>Credit Value</span><strong>$10.00</strong></div>
+                <div class="detail-row"><span>Model Choice</span><strong>Full catalog</strong></div>
+                <div class="detail-row"><span>Pooling</span><strong>N/A</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="plan-card" data-plan="proplus">
+            <div class="plan-header proplus">
+              <h3>Copilot Pro+</h3>
+              <div class="plan-price">$39<span>/user/mo</span></div>
+            </div>
+            <div class="plan-body">
+              <div class="plan-detail seat-detail">
+                <div class="detail-row"><span>PRU Allowance</span><strong>1,500/mo</strong></div>
+                <div class="detail-row"><span>Overage</span><strong>$0.04/request</strong></div>
+                <div class="detail-row"><span>Model Choice</span><strong>Extended</strong></div>
+              </div>
+              <div class="plan-detail token-detail">
+                <div class="detail-row"><span>AI Credits</span><strong>3,900/mo</strong></div>
+                <div class="detail-row"><span>Credit Value</span><strong>$39.00</strong></div>
+                <div class="detail-row"><span>Model Choice</span><strong>Full catalog</strong></div>
+                <div class="detail-row"><span>Pooling</span><strong>N/A</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="plan-card featured" data-plan="business">
+            <div class="plan-header business">
+              <div class="featured-badge">Most Popular</div>
+              <h3>Copilot Business</h3>
+              <div class="plan-price">$19<span>/user/mo</span></div>
+            </div>
+            <div class="plan-body">
+              <div class="plan-detail seat-detail">
+                <div class="detail-row"><span>PRU Allowance</span><strong>300/mo per user</strong></div>
+                <div class="detail-row"><span>Overage</span><strong>$0.04/request</strong></div>
+                <div class="detail-row"><span>Model Choice</span><strong>Standard</strong></div>
+              </div>
+              <div class="plan-detail token-detail">
+                <div class="detail-row"><span>AI Credits</span><strong>1,900/user/mo</strong></div>
+                <div class="detail-row highlight"><span>Promo Credits</span><strong>3,000/user (3 mo)</strong></div>
+                <div class="detail-row"><span>Credit Value</span><strong>$19.00/user</strong></div>
+                <div class="detail-row"><span>Model Choice</span><strong>Full catalog</strong></div>
+                <div class="detail-row"><span>Pooling</span><strong class="pool-yes">✓ Org-wide</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="plan-card" data-plan="enterprise">
+            <div class="plan-header enterprise">
+              <h3>Copilot Enterprise</h3>
+              <div class="plan-price">$39<span>/user/mo</span></div>
+            </div>
+            <div class="plan-body">
+              <div class="plan-detail seat-detail">
+                <div class="detail-row"><span>PRU Allowance</span><strong>1,000/mo per user</strong></div>
+                <div class="detail-row"><span>Overage</span><strong>$0.04/request</strong></div>
+                <div class="detail-row"><span>Model Choice</span><strong>Extended</strong></div>
+              </div>
+              <div class="plan-detail token-detail">
+                <div class="detail-row"><span>AI Credits</span><strong>3,900/user/mo</strong></div>
+                <div class="detail-row highlight"><span>Promo Credits</span><strong>7,000/user (3 mo)</strong></div>
+                <div class="detail-row"><span>Credit Value</span><strong>$39.00/user</strong></div>
+                <div class="detail-row"><span>Model Choice</span><strong>Full catalog</strong></div>
+                <div class="detail-row"><span>Pooling</span><strong class="pool-yes">✓ Org-wide</strong></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Comparison Summary -->
+        <section class="comparison-section" id="comparisonSection">
+          <h2>📊 Cost Comparison Summary</h2>
+          <div class="comparison-grid">
+            <div class="comparison-card old-model">
+              <h3>Per-Seat Model (Current)</h3>
+              <div class="total-cost" id="seatTotalCost">$0</div>
+              <p class="cost-label">Estimated monthly cost</p>
+              <div class="cost-breakdown" id="seatBreakdown"></div>
+            </div>
+            <div class="comparison-card new-model">
+              <h3>Token-Based Model (UBB)</h3>
+              <div class="total-cost" id="tokenTotalCost">$0</div>
+              <p class="cost-label">Estimated monthly cost</p>
+              <div class="cost-breakdown" id="tokenBreakdown"></div>
+            </div>
+          </div>
+          <div class="savings-indicator" id="savingsIndicator"></div>
+        </section>
+
+        <!-- Model Pricing Table -->
+        <section class="pricing-table-section">
+          <h2>🤖 Model Token Pricing</h2>
+          <p class="section-desc">Per 1 million tokens · 1 AI credit = $0.01 · Code completions are FREE</p>
+          <div class="pricing-table-wrapper">
+            <table class="pricing-table" id="pricingTable">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Provider</th>
+                  <th>Input</th>
+                  <th>Output</th>
+                  <th>Cached</th>
+                  <th>Cache Write</th>
+                  <th>Cost Tier</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Side-by-Side Model Comparison -->
+        <section class="model-comparison-section" id="modelComparison">
+          <h2>⚖️ Side-by-Side Model Comparison</h2>
+          <p class="section-desc">Select two models to compare cost per interaction, monthly spend, and efficiency</p>
+          <div class="comparison-selectors">
+            <div class="compare-select">
+              <label>Model A</label>
+              <select id="compareModelA"></select>
+            </div>
+            <div class="compare-vs">VS</div>
+            <div class="compare-select">
+              <label>Model B</label>
+              <select id="compareModelB"></select>
+            </div>
+          </div>
+          <div class="compare-scenario">
+            <label>Tokens per interaction:</label>
+            <input type="range" id="compareTokens" min="500" max="50000" value="2000" step="500">
+            <span id="compareTokensValue">2,000</span>
+          </div>
+          <div class="compare-results" id="compareResults">
+            <div class="compare-col" id="compareColA"></div>
+            <div class="compare-col" id="compareColB"></div>
+          </div>
+          <div class="compare-verdict" id="compareVerdict"></div>
+        </section>
+
+        <!-- Best Practices -->
+        <section class="best-practices" id="bestPractices">
+          <h2>💡 Best Practices to Reduce Token-Based Costs</h2>
+          <div class="practices-grid">
+            <div class="practice-card">
+              <div class="practice-icon">🎯</div>
+              <h4>Choose the Right Model</h4>
+              <p>Use lighter models (GPT-5.4 nano, Gemini Flash-Lite, Claude Haiku) for routine tasks. Reserve premium models (GPT-5.5, Claude Opus) for complex reasoning. This alone can reduce costs <strong>10-50x</strong>.</p>
+              <a href="https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing" target="_blank" class="ref-link">GitHub Docs: Models & Pricing ↗</a>
+            </div>
+            <div class="practice-card">
+              <div class="practice-icon">📝</div>
+              <h4>Write Precise Prompts</h4>
+              <p>Concise, specific prompts reduce input tokens and produce more targeted outputs. Avoid pasting entire files when only a snippet is needed. Less context = fewer tokens consumed.</p>
+              <a href="https://docs.github.com/en/copilot/using-github-copilot/prompt-engineering-for-github-copilot" target="_blank" class="ref-link">GitHub Docs: Prompt Engineering ↗</a>
+            </div>
+            <div class="practice-card">
+              <div class="practice-icon">🏊</div>
+              <h4>Leverage Org Pooling</h4>
+              <p>Business and Enterprise plans pool credits across the organization. Light users subsidize heavy users. This eliminates wasted capacity from underused individual allocations.</p>
+              <a href="https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/" target="_blank" class="ref-link">GitHub Blog: Usage-Based Billing ↗</a>
+            </div>
+            <div class="practice-card">
+              <div class="practice-icon">📊</div>
+              <h4>Monitor Usage Dashboards</h4>
+              <p>Use GitHub's Copilot usage dashboards to track token consumption by team, repo, and user. Set budgets at enterprise, cost center, and user levels. Identify power users early.</p>
+              <a href="https://docs.github.com/en/copilot/managing-copilot/managing-copilot-for-your-enterprise/managing-the-copilot-plan-for-your-enterprise" target="_blank" class="ref-link">GitHub Docs: Managing Copilot ↗</a>
+            </div>
+            <div class="practice-card">
+              <div class="practice-icon">🔧</div>
+              <h4>Optimize Agent Workflows</h4>
+              <p>Agent mode and multi-step workflows consume significantly more tokens. Break complex tasks into smaller steps. Use inline completions (free) instead of chat when possible.</p>
+              <a href="https://docs.github.com/en/copilot/using-github-copilot/using-copilot-coding-agent" target="_blank" class="ref-link">GitHub Docs: Copilot Agent ↗</a>
+            </div>
+            <div class="practice-card">
+              <div class="practice-icon">🏦</div>
+              <h4>Set Budget Guardrails</h4>
+              <p>Configure overage budgets and spending limits. When credits + overage are exhausted, users drop to code completion only. Plan capacity proactively — especially for heavy agent users.</p>
+              <a href="https://docs.github.com/en/copilot/managing-copilot/managing-copilot-for-your-enterprise/setting-up-copilot-for-your-enterprise" target="_blank" class="ref-link">GitHub Docs: Enterprise Setup ↗</a>
+            </div>
+            <div class="practice-card">
+              <div class="practice-icon">📁</div>
+              <h4>Refactor Large Files</h4>
+              <p>Copilot sends file context as input tokens. Smaller, well-structured files mean less context overhead. Break large monolithic files into focused modules.</p>
+              <a href="https://docs.github.com/en/copilot/using-github-copilot/best-practices-for-using-github-copilot" target="_blank" class="ref-link">GitHub Docs: Best Practices ↗</a>
+            </div>
+            <div class="practice-card">
+              <div class="practice-icon">🎓</div>
+              <h4>Train Teams on Prompt Efficiency</h4>
+              <p>A small investment in prompt engineering training yields significant cost savings at scale. Educate developers on token-efficient workflows and model selection.</p>
+              <a href="https://resources.github.com/learn/pathways/copilot/essentials/essentials-of-prompt-engineering-with-github-copilot/" target="_blank" class="ref-link">GitHub: Prompt Engineering Essentials ↗</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- References -->
+        <section class="references" id="references">
+          <h2>📚 Verified References</h2>
+          <div class="ref-grid">
+            <a href="https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/" target="_blank" class="ref-card">
+              <div class="ref-source">GitHub Blog</div>
+              <div class="ref-title">GitHub Copilot is Moving to Usage-Based Billing</div>
+              <div class="ref-desc">Official announcement explaining the transition from PRU to Usage-Based Billing</div>
+            </a>
+            <a href="https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing" target="_blank" class="ref-card">
+              <div class="ref-source">GitHub Docs</div>
+              <div class="ref-title">Models and Pricing for GitHub Copilot</div>
+              <div class="ref-desc">Complete pricing tables for all supported models including per-token rates</div>
+            </a>
+            <a href="https://docs.github.com/en/copilot/managing-copilot/managing-copilot-for-your-enterprise/managing-the-copilot-plan-for-your-enterprise" target="_blank" class="ref-card">
+              <div class="ref-source">GitHub Docs</div>
+              <div class="ref-title">Managing the Copilot Plan for Your Enterprise</div>
+              <div class="ref-desc">Budget management, credit pooling, and overage controls for enterprise admins</div>
+            </a>
+            <a href="https://docs.github.com/en/copilot/using-github-copilot/prompt-engineering-for-github-copilot" target="_blank" class="ref-card">
+              <div class="ref-source">GitHub Docs</div>
+              <div class="ref-title">Prompt Engineering for GitHub Copilot</div>
+              <div class="ref-desc">Write effective prompts to get better results with fewer tokens</div>
+            </a>
+            <a href="https://www.zdnet.com/article/github-copilot-shifts-to-usage-based-pricing/" target="_blank" class="ref-card">
+              <div class="ref-source">ZDNET</div>
+              <div class="ref-title">GitHub Copilot Shifts to Usage-Based Pricing</div>
+              <div class="ref-desc">Industry analysis of the billing model transition and enterprise impact</div>
+            </a>
+            <a href="https://thenewstack.io/github-copilot-usage-billing/" target="_blank" class="ref-card">
+              <div class="ref-source">The New Stack</div>
+              <div class="ref-title">GitHub Moves Copilot to Usage-Based Billing</div>
+              <div class="ref-desc">Technical deep-dive on token consumption patterns and cost implications</div>
+            </a>
+          </div>
+        </section>
+      </div>
+
+      <!-- Side Panel -->
+      <aside class="side-panel" id="sidePanel">
+        <div class="panel-header">
+          <h2>⚙️ Live Cost Adjuster</h2>
+          <p>Adjust parameters to see real-time cost impact</p>
+        </div>
+
+        <div class="panel-section">
+          <label>Plan Type</label>
+          <select id="planType">
+            <option value="business" selected>Business ($19/user/mo)</option>
+            <option value="enterprise">Enterprise ($39/user/mo)</option>
+            <option value="pro">Pro ($10/user/mo)</option>
+            <option value="proplus">Pro+ ($39/user/mo)</option>
+          </select>
+        </div>
+
+        <div class="panel-section">
+          <label>Number of Users</label>
+          <input type="range" id="userCount" min="1" max="100000" value="100" step="1">
+          <div class="range-value"><input type="number" id="userCountInput" value="100" min="1" max="100000"></div>
+        </div>
+
+        <div class="panel-section">
+          <label>Primary Model</label>
+          <select id="primaryModel">
+            <option value="gpt54nano">GPT-5.4 nano ($0.20/$1.25)</option>
+            <option value="gpt54mini">GPT-5.4 mini ($0.75/$4.50)</option>
+            <option value="gpt54" selected>GPT-5.4 ($2.50/$15.00)</option>
+            <option value="gpt55">GPT-5.5 ($5.00/$30.00)</option>
+            <option value="gpt53codex">GPT-5.3 Codex ($1.75/$14.00)</option>
+            <option value="gpt52codex">GPT-5.2 Codex ($1.75/$14.00)</option>
+            <option value="gpt41">GPT-4.1 ($2.00/$8.00)</option>
+            <option value="claudehaiku">Claude Haiku 4.5 ($1.00/$5.00)</option>
+            <option value="claudesonnet45">Claude Sonnet 4.5 ($3.00/$15.00)</option>
+            <option value="claudesonnet">Claude Sonnet 4.6 ($3.00/$15.00)</option>
+            <option value="claudeopus46">Claude Opus 4.6 ($5.00/$25.00)</option>
+            <option value="claudeopus">Claude Opus 4.7 ($5.00/$25.00)</option>
+            <option value="geminiflashlite">Gemini 2.5 Flash-Lite ($0.10/$0.40)</option>
+            <option value="geminiflash">Gemini 2.5 Flash ($0.30/$2.50)</option>
+            <option value="geminipro">Gemini 3.1 Pro ($2.00/$12.00)</option>
+          </select>
+        </div>
+
+        <div class="panel-section">
+          <label>Avg. Chat Interactions / User / Day</label>
+          <input type="range" id="interactions" min="1" max="100" value="15" step="1">
+          <div class="range-value"><span id="interactionsValue">15</span></div>
+        </div>
+
+        <div class="panel-section">
+          <label>Avg. Tokens per Interaction</label>
+          <input type="range" id="tokensPerInteraction" min="100" max="50000" value="2000" step="100">
+          <div class="range-value"><span id="tokensPerInteractionValue">2,000</span></div>
+        </div>
+
+        <div class="panel-section">
+          <label>Input/Output Ratio</label>
+          <input type="range" id="ioRatio" min="10" max="90" value="70" step="5">
+          <div class="range-value"><span id="ioRatioValue">70% input / 30% output</span></div>
+        </div>
+
+        <div class="panel-section">
+          <label>Working Days / Month</label>
+          <input type="range" id="workDays" min="15" max="23" value="22" step="1">
+          <div class="range-value"><span id="workDaysValue">22</span></div>
+        </div>
+
+        <div class="panel-section">
+          <label>Active User Percentage</label>
+          <input type="range" id="activeUsers" min="10" max="100" value="70" step="5">
+          <div class="range-value"><span id="activeUsersValue">70%</span></div>
+        </div>
+
+        <div class="panel-divider"></div>
+
+        <!-- Live Results -->
+        <div class="panel-results">
+          <h3>Monthly Estimate</h3>
+          <div class="result-row">
+            <span>Seat Cost</span>
+            <strong id="resultSeatCost">$0</strong>
+          </div>
+          <div class="result-row">
+            <span>Total Tokens/Month</span>
+            <strong id="resultTotalTokens">0</strong>
+          </div>
+          <div class="result-row">
+            <span>Credits Included</span>
+            <strong id="resultCreditsIncluded">0</strong>
+          </div>
+          <div class="result-row">
+            <span>Credits Used</span>
+            <strong id="resultCreditsUsed">0</strong>
+          </div>
+          <div class="result-row overage-row" id="overageRow">
+            <span>Overage Cost</span>
+            <strong id="resultOverage">$0</strong>
+          </div>
+          <div class="result-total">
+            <span>Total Monthly Cost</span>
+            <strong id="resultTotal">$0</strong>
+          </div>
+          <div class="result-per-user">
+            <span>Effective Cost / User</span>
+            <strong id="resultPerUser">$0</strong>
+          </div>
+        </div>
+
+        <div class="panel-divider"></div>
+
+        <div class="panel-insight" id="panelInsight">
+          <h3>💡 Quick Insight</h3>
+          <p id="insightText">Adjust the parameters above to see how different configurations affect your total cost.</p>
+        </div>
+
+        <button class="reset-btn" id="resetBtn">↺ Reset to Defaults</button>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>Built for GitHub Copilot billing readiness · Data sourced from <a href="https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing" target="_blank">GitHub Docs</a> and <a href="https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/" target="_blank">GitHub Blog</a></p>
+      <p class="disclaimer">⚠️ This is an unofficial community tool built to help navigate GitHub Copilot's billing changes. It is not affiliated with, endorsed by, or officially supported by GitHub. Pricing data as of April 2026. All estimates are approximate. Actual costs may vary. Always verify at <a href="https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing" target="_blank">docs.github.com</a>.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
