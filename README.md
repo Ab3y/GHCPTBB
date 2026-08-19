@@ -6,6 +6,20 @@ A zero-dependency, single-page web application that helps organizations understa
 ![Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)
 ![Status](https://img.shields.io/badge/status-active-success)
 
+## Screenshots
+
+### Billing Dashboard and Live Cost Adjuster
+
+![Billing dashboard with plan cards, cost comparison, and live controls](docs/screenshots/dashboard.png)
+
+### Model Cost Comparison
+
+![Side-by-side model pricing and estimated usage comparison](docs/screenshots/model-comparison.png)
+
+### Cost Optimization Best Practices
+
+![Token cost optimization recommendations and live controls](docs/screenshots/best-practices.png)
+
 ---
 
 ## 🎯 Purpose
@@ -95,6 +109,8 @@ GHCPTBB/
 ├── index.html      # Main page structure and layout
 ├── styles.css      # Complete styling (dark theme, responsive)
 ├── app.js          # Calculator engine, toggle logic, live updates
+├── docs/
+│   └── screenshots/ # README screenshots
 ├── UBB-GUIDE.md    # Complete UBB education guide (27K words, 30+ refs)
 └── README.md       # This file
 ```
