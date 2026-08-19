@@ -2,6 +2,8 @@
 
 A zero-dependency, single-page web application that helps organizations understand, compare, and optimize GitHub Copilot costs as billing transitions from per-seat (PRU) to Usage-Based Billing (UBB) on June 1, 2026.
 
+> **Live demo:** [Open the GitHub Copilot Billing Calculator](https://ab3y.github.io/GHCPTBB/)
+
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)
 ![Status](https://img.shields.io/badge/status-active-success)
